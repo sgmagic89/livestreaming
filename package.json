@@ -1,0 +1,28 @@
+{
+  "name": "dummy-sensor-server",
+  "version": "0.1.0",
+  "description": "Server which provides random data",
+  "engines": {
+    "node": ">6.0.0"
+  },
+  "main": "./src/server.js",
+  "scripts": {
+    "start": "eslint src && nodemon ./src/server.js",
+    "test": "mocha"
+  },
+  "author": "Tomi Tuhkanen",
+  "license": "ISC",
+  "devDependencies": {
+    "chai": "^3.5.0",
+    "mocha": "^2.5.3",
+    "nodemon": "^1.9.2"
+  },
+  "dependencies": {
+    "cors": "^2.8.1",
+    "express": "^4.13.4",
+    "json-middleware": "^1.0.2",
+    "morgan": "^1.7.0",
+    "socket.io": "^1.4.6",
+    "superagent": "^3.0.0"
+  }
+}
