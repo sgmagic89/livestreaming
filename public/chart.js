@@ -1,5 +1,5 @@
 const id='chart';
-var sensorData = [];
+var sensorData;
 var sensorLabel = "";
 var zoomLevel = 300000;
 var ctx;
@@ -63,29 +63,33 @@ const getSensorData = function getSensorData(sensorvalue) {
     console.log("getsensor data  called", sensorvalue);
     try {
     sensorLabel = sensorvalue.id;
-    sensorData.push({
+    sensorData = {
         x: new Date(sensorvalue.timestamp),
         y: sensorvalue.data
-    });
-    config.data.datasets[0].data = sensorData;
+    };
+    config.data.datasets[0].data.push(sensorData);
     config.data.label = sensorLabel;
     } catch(e) {
         chart.update();
     }
     chart.update();
-    console.log(sensorData.length);
+    console.log( config.data.datasets[0].data.length);
     
 }
 
 const drawChart = function drawChart() {
     console.log("draw chart called");
     ctx = document.getElementById(id).getContext('2d');
+    ctx.canvas.width = '700';
+    ctx.canvas.height = '300';
     chart = new Chart(ctx, config);
 }
 
 const destroyChart = function destroyChart() {
+    console.log('Destroy called');
     chart.destroy();
-    sensorData = [];
+    sensorData = null;
+    config.data.datasets[0].data = [];
 }
 // const chart = {
 //     c3Chart: c3.generate({

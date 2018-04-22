@@ -37,7 +37,7 @@
     <button id="zoomAdd" class="btn btn-primary"> + </button>
     <button id="zoomSub" class="btn btn-success"> - </button>
     <!-- <div id="graph"></div> -->
-    <canvas id="chart" style="height: 300px; width: 700px"></canvas>
+    <canvas id="chart"></canvas>
 </div>
 </div>
 </div>
@@ -82,7 +82,7 @@
             subs.dispose();
             subscriptions.delete(sensorId);
 
-            destroyChart();
+            
         });
 
         $(document).ready(() => {
@@ -94,6 +94,12 @@
                 var sensorId = $('#deviceId').val();
                 drawChart();
                 socket.emit('listen', sensorId);
+            });
+
+            $('#stop').click(() => {
+                var sensorId = $('#deviceId').val();
+                socket.emit('stop', sensorId);
+                destroyChart();
             });
 
             $('#zoomAdd').click(() => {
